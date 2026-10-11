@@ -16,6 +16,7 @@ Set your OpenRouter credentials in `.env`:
 OPENROUTER_API_KEY=your_openrouter_key
 OPENROUTER_EMBEDDING_MODEL=openai/text-embedding-3-small
 PORT=3000
+FRONTEND_URL=http://localhost:5173
 ```
 
 Start the server:
@@ -25,6 +26,9 @@ npm start
 ```
 
 Movie embeddings are generated when the server starts and are kept in memory.
+
+`FRONTEND_URL` can contain multiple comma-separated frontend URLs. If it is
+omitted, CORS allows all origins, which is convenient for local learning.
 
 ## Endpoints
 

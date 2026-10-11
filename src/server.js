@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 const OpenAI = require("openai");
 const DemoApplication = require("./DemoApplication");
 const OpenAIEmbeddingModel = require("./OpenAIEmbeddingModel");
@@ -29,7 +30,11 @@ async function createApp() {
 
     const movieController = await DemoApplication.main(embeddingModel);
     const app = express();
+    const allowedOrigins = process.env.FRONTEND_URL
+        ? process.env.FRONTEND_URL.split(",").map(origin => origin.trim())
+        : true;
 
+    app.use(cors({ origin: allowedOrigins }));
     app.use(express.json());
 
     app.get("/health", (request, response) => {
